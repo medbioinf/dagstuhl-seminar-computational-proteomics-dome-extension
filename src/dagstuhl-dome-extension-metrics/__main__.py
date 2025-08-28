@@ -187,46 +187,40 @@ def main():
 
     df = pd.DataFrame()
 
-    if DF_CACHE_FILE.exists():
+    if DF_CACHE_FILE.is_file():
         logging.info("Dataframe cache file found. Loading data from cache.")
         df = pd.read_csv(DF_CACHE_FILE, sep="\t", encoding="utf-8")
     else:
-        if TOOL_CACHE_FILE.exists():
-            logging.info("Cache file found. Loading data from cache.")
+        tools = []
+        if TOOL_CACHE_FILE.is_file():
+            logging.info("bio.tools cache file found. Loading data from cache.")
             with TOOL_CACHE_FILE.open("r", encoding="utf-8") as f:
                 tools = json.load(f)
         else:
-            tools = []
-            if TOOL_CACHE_FILE.exists():
-                logging.info("bio.tools cache file found. Loading data from cache.")
-                with TOOL_CACHE_FILE.open("r", encoding="utf-8") as f:
-                    tools = json.load(f)
+            logging.info("Cache file not found. Fetching data from bio.tools API.")
 
-            else:
-                logging.info("Cache file not found. Fetching data from bio.tools API.")
+            logging.info("Fetching proteomic tools...")
+            for topic in PROTEOMICS_EDAM_TOPICS:
+                logging.info("\t... fetching tools for topic '%s'", topic)
+                tools.extend(get_tools(topic))
 
-                logging.info("Fetching proteomic tools...")
-                for topic in PROTEOMICS_EDAM_TOPICS:
-                    logging.info("\t... fetching tools for topic '%s'", topic)
-                    tools.extend(get_tools(topic))
+            logging.info("Fetching genomic tools...")
+            for topic in GENOMIC_EDAM_TOPICS:
+                logging.info("\t... fetching tools for topic '%s'", topic)
+                tools.extend(get_tools(topic))
 
-                logging.info("Fetching genomic tools...")
-                for topic in GENOMIC_EDAM_TOPICS:
-                    logging.info("\t... fetching tools for topic '%s'", topic)
-                    tools.extend(get_tools(topic))
-
-                with TOOL_CACHE_FILE.open("w", encoding="utf-8") as f:
-                    json.dump(tools, f)
+            with TOOL_CACHE_FILE.open("w", encoding="utf-8") as f:
+                json.dump(tools, f)
 
             logging.info("Removing duplicate tools based on biotoolsID.")
             unique_tools = {tool["biotoolsID"]: tool for tool in tools}
             tools = list(unique_tools.values())
 
-            logging.info("Converting tools to DataFrame.")
-            df = tools_to_df(tools)
+        logging.info("Converting tools to DataFrame.")
+        df = tools_to_df(tools)
 
-            logging.info("Writing fetched data to cache file.")
-            df.to_csv(DF_CACHE_FILE, sep="\t", index=False, encoding="utf-8")
+        logging.info("Writing fetched data to cache file.")
+        df.to_csv(DF_CACHE_FILE, sep="\t", index=False, encoding="utf-8")
 
 
 if __name__ == "__main__":
