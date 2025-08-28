@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools", "wheel", "Cython"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dagstuhl-dome-extension-metrics"
+version = "2.0.0"
+requires-python = ">=3.12"
+license = {file = "./LICENSE"}
+description = "A collection of metrics for the analysis of protoemics (ML) software projects from bio.tools"
+authors = [
+    {name = "Dirk Winkelhardt", email = "dirk.winkelhardt@rub.de"},
+]
+maintainers = [
+    {name = "Dirk Winkelhardt", email = "dirk.winkelhardt@rub.de"}
+]
+
+dependencies = [
+	"pandas",
+	"requests"
+]
+
+[project.optional-dependencies]
+dev = [
+	"black",
+	"pandas-stubs",
+    "pylint",
+	"types-requests"
+]
