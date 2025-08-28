@@ -4,12 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dagstuhl-dome-extension-metrics"
-version = "2.0.0"
+version = "0.0.1"
 requires-python = ">=3.12"
 license = {file = "./LICENSE"}
-description = "A collection of metrics for the analysis of protoemics (ML) software projects from bio.tools"
+description = "FAIRness and EVERSE software quality metrics analysis of DOME extension break out group @ Dagstuhl Seminar 2025"
 authors = [
     {name = "Dirk Winkelhardt", email = "dirk.winkelhardt@rub.de"},
+	{name = "Charlotte Adams ", email = "Charlotte.Adams@uantwerpen.be"},
+	{name = "Wassim Gabriel", email = "wassim.gabriel@tum.de"},
+	{name = "Magnus Palmblad", email = "magnus.palmblad@gmail.com"},
 ]
 maintainers = [
     {name = "Dirk Winkelhardt", email = "dirk.winkelhardt@rub.de"}

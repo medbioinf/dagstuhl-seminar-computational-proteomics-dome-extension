@@ -1,0 +1,19 @@
+cff-version: 0.0.1
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Dirk"
+  given-names: "Winkelhardt"
+  orcid: "https://orcid.org/0000-0001-8770-2221"
+- family-names: "Charlotte"
+  given-names: "Adams"
+  orcid: "https://orcid.org/0000-0001-5652-2324"
+- family-names: "Wassim"
+  given-names: "Gabriel"
+  orcid: "https://orcid.org/0000-0001-6440-9794"
+- family-names: "Magnus"
+  given-names: "Palmblad"
+  orcid: "https://orcid.org/0000-0002-5865-8994"
+title: "FAIRness and EVERSE software quality metrics analysis of DOME extension break out group @ Dagstuhl Seminar 2025"
+version: 0.0.1
+date-released: 2025-08-28
+url: "https://github.com/medbioinf/dagstuhl-seminar-computational-proteomics-dome-extension"
